@@ -7,23 +7,31 @@ namespace InheritanceAndPolymorphism
     {
         static void Main()
         {
-            LocalCourse localCourse = new LocalCourse("Databases");
+            IList<Student> students = new List<Student>()
+            {
+                new Student("Peter"),
+                new Student("Maria")
+            };
+            LocalCourse localCourse = new LocalCourse("Databases",
+                new Teacher("Svetlin Nakov"), students, "Enterprise");
             Console.WriteLine(localCourse);
 
             localCourse.Lab = "Enterprise";
             Console.WriteLine(localCourse);
 
-            localCourse.Students = new List<string>() { "Peter", "Maria" };
+            localCourse.Students.Add(new Student("Milena"));
+            localCourse.Students.Add(new Student("Todor"));
             Console.WriteLine(localCourse);
 
-            localCourse.TeacherName = "Svetlin Nakov";
-            localCourse.Students.Add("Milena");
-            localCourse.Students.Add("Todor");
-            Console.WriteLine(localCourse);
-
+            IList<Student> offsiteStudents = new List<Student>()
+            {
+                new Student("Thomas"),
+                new Student("Ani"),
+                new Student("Steve"),
+            };
             OffsiteCourse offsiteCourse = new OffsiteCourse(
-                "PHP and WordPress Development", "Mario Peshev", 
-                new List<string>() { "Thomas", "Ani", "Steve" });
+                "PHP and WordPress Development", new Teacher("Mario Peshev"),
+                offsiteStudents, "Burgas");
             Console.WriteLine(offsiteCourse);
         }
     }
